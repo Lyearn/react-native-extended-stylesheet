@@ -3,10 +3,13 @@ import Value from '../value';
 
 const varsArr = [
   {
+    'var(--a)': 1,
+    'var(--b)': 2,
     $a: 1,
     $b: 2,
   },
   {
+    'var(--a)': 2,
     $a: 2,
     $c: 3,
     $e: 'abc',
@@ -30,6 +33,8 @@ describe('value', function () {
   it('should calc var', function () {
     expect(new Value('$a', 'prop', varsArr).calc()).toEqual(1);
     expect(new Value('$b', 'prop', varsArr).calc()).toEqual(2);
+    expect(new Value('var(--a)', 'prop', varsArr).calc()).toEqual(1);
+    expect(new Value('var(--b)', 'prop', varsArr).calc()).toEqual(2);
     expect(new Value('$e', 'prop', varsArr).calc()).toEqual('abc');
     expect(new Value('$d', 'prop', varsArr).calc()).toEqual({x: 1});
     expect(new Value('$r', 'prop', varsArr).calc()).toEqual(32);

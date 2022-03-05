@@ -5,6 +5,8 @@
 import resolvePath from 'object-resolve-path';
 
 const PREFIX = '$';
+const CSS_START_PREFIX = 'var(--';
+const CSS_END_PREFIX = ')';
 
 export default {
   isVar,
@@ -18,7 +20,8 @@ export default {
  * @param {String} str
  */
 function isVar(str) {
-  return typeof str === 'string' && str.charAt(0) === PREFIX;
+  if (typeof str !== 'string') return false
+  return str.charAt(0) === PREFIX || (str.startsWith(CSS_START_PREFIX) && str.endsWith(CSS_END_PREFIX));
 }
 
 /**

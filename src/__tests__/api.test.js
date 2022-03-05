@@ -8,6 +8,31 @@ describe('EStyleSheet API', function () {
     api = new Api();
   });
 
+  describe('test var(--primary) type variable', function () {
+    it('hello', function () {
+      api.build({'var(--text-primary)': '#fff'});
+      const styles = api.create({
+        'var(--text-primary-copy)': 'var(--text-primary)',
+        button: {
+          color: 'var(--text-primary-copy)',
+          backgroundColor: 'var(--text-primary)',
+        }
+      });
+
+      expect(styles).toEqual({
+        'var(--text-primary-copy)': '#fff',
+        _button: {
+          color: '#fff',
+          backgroundColor: '#fff',
+        },
+        button: {
+          color: '#fff',
+          backgroundColor: '#fff'
+        },
+      });
+    })
+  })
+
   describe('build', function () {
     it('should calc stylesheet, created before build()', function () {
       const styles = api.create({
@@ -32,7 +57,10 @@ describe('EStyleSheet API', function () {
           fontSize: 1,
           color: 3,
         },
-        text: 0,
+        text: {
+          fontSize: 1,
+          color: 3,
+        },
       });
     });
 
@@ -49,7 +77,9 @@ describe('EStyleSheet API', function () {
         _button: {
           color: 3,
         },
-        button: 0,
+        button: {
+          color: 3
+        },
       });
     });
 
@@ -113,7 +143,10 @@ describe('EStyleSheet API', function () {
         fontSize: 1,
         color: 3,
       },
-      text: 0,
+      text: {
+        fontSize: 1,
+        color: 3,
+      },
     };
 
     it('should re-calculate styles, created before rebuild', function () {
@@ -182,7 +215,9 @@ describe('EStyleSheet API', function () {
         _text: {
           fontSize: 1
         },
-        text: 0
+        text: {
+          fontSize: 1
+        }
       });
     });
   });

@@ -83,9 +83,18 @@ export default class {
   }
 
   calcNative() {
-    if (Object.keys(this.nativeSheet).length) {
-      const rnStyleSheet = StyleSheet.create(this.nativeSheet);
-      Object.assign(this.result, rnStyleSheet);
+    const keys = Object.keys(this.nativeSheet);
+    if (keys.length) {
+      try {
+        const rnStyleSheet = StyleSheet.create(this.nativeSheet);
+        Object.assign(this.result, rnStyleSheet);
+      } catch (e) {
+        const emptyStyleSheet = keys.reduce((result, key) => {
+          result[key] = {};
+          return result;
+        }, {});
+        Object.assign(this.result, emptyStyleSheet)
+      }
     }
   }
 

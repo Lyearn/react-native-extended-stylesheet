@@ -18,13 +18,28 @@ export let I18nManager = {
 
 export let StyleSheet = {
   create(obj) {
-    return Object.keys(obj).reduce((res, key, index) => {
-      res[key] = index;
-      return res;
-    }, {});
+    return obj;
   },
-  flatten(arr) {
-    return arr.reduce((res, item) => Object.assign(res, item), {});
+  flatten(style) {
+    if (style === null || typeof style !== 'object') {
+      return undefined;
+    }
+
+    if (!Array.isArray(style)) {
+      return style;
+    }
+
+    const result = {};
+    for (let i = 0, styleLength = style.length; i < styleLength; ++i) {
+      const computedStyle = StyleSheet.flatten(style[i]);
+      if (computedStyle) {
+        // eslint-disable-next-line no-unused-vars
+        for (const key in computedStyle) {
+          result[key] = computedStyle[key];
+        }
+      }
+    }
+    return result;
   },
   hairlineWidth: 1
 };

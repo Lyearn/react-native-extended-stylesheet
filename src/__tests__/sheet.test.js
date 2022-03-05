@@ -24,7 +24,11 @@ describe('sheet', function () {
         borderWidth: 2,
         prop: 'abc',
       },
-      text: 0,
+      text: {
+        fontSize: 10,
+        borderWidth: 2,
+        prop: 'abc',
+      },
     });
   });
 
@@ -63,7 +67,9 @@ describe('sheet', function () {
       _button: {
         prop: 3,
       },
-      button: 0,
+      button: {
+        prop: 3,
+      },
     });
   });
 
@@ -102,7 +108,9 @@ describe('sheet', function () {
       _text: {
         fontSize: 2,
       },
-      text: 0,
+      text: {
+        fontSize: 2,
+      },
     });
   });
 

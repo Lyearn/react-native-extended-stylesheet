@@ -4,6 +4,7 @@
  * Writing strict declarations is a tricky (impossible?) task,
  * because EStyleSheet actively operates with dynamic keys:
  * - variables (started with "$...")
+ * - variables (with syntax "var(...)")
  * - media queries (started with "@media...")
  * - underscored output keys (started with "_...")
  *
@@ -25,7 +26,7 @@ declare namespace EStyleSheet {
     export function child<T>(styles: T, styleName: string, index: number, count: number): T;
     export function subscribe(event: Event, listener: () => any): void;
     export function clearCache(): void;
-  
+
     // inherited from StyleSheet
     export const flatten: typeof StyleSheet.flatten;
     export const setStyleAttributePreprocessor: typeof StyleSheet.setStyleAttributePreprocessor;
