@@ -149,7 +149,7 @@ export default class Value {
    */
   tryCalcRem(str) {
     if (rem.isRem(str)) {
-      let remValue = vars.get('$rem', this.varsArr);
+      let remValue = vars.get('$rem', this.varsArr) || vars.get('var(--rem)', this.varsArr);
       return rem.calc(str, remValue);
     } else {
       return null;
